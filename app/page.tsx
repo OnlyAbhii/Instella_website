@@ -241,69 +241,40 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="relative z-10 border-t border-white/10 bg-black py-24">
-        <div className="container px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="mx-auto max-w-3xl rounded-2xl border border-white/10 bg-white/5 p-8 text-center backdrop-blur-sm md:p-12 lg:p-16"
-          >
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Join Our Telegram Group</h2>
-            <p className="mx-auto mt-4 max-w-xl text-gray-400">
-              Must join our telegram group to stay updated about updates and announcements.
-            </p>
-            <ul className="mx-auto mt-8 flex max-w-xl flex-col gap-4 text-left">
-              <motion.li
-                className="flex items-center space-x-3"
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3 }}
-                viewport={{ once: true }}
-              >
-                <CheckCircle2 className="h-5 w-5 text-white" />
-                <span>Get Backup file</span>
-              </motion.li>
-              <motion.li
-                className="flex items-center space-x-3"
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3, delay: 0.1 }}
-                viewport={{ once: true }}
-              >
-                <CheckCircle2 className="h-5 w-5 text-white" />
-                <span>Get support 24/7</span>
-              </motion.li>
-              <motion.li
-                className="flex items-center space-x-3"
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3, delay: 0.2 }}
-                viewport={{ once: true }}
-              >
-                <CheckCircle2 className="h-5 w-5 text-white" />
-                <span>Experience new features</span>
-              </motion.li>
-            </ul>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              viewport={{ once: true }}
-            >
-              <Button
-                className="mt-8 bg-white text-black hover:bg-gray-200"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Join Now
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
+<section className="relative z-10 border-t border-white/10 bg-black py-24">
+  <div className="container px-4">
+    <div className="mx-auto max-w-3xl rounded-2xl border border-white/10 bg-gradient-to-r from-cyan-950/50 to-violet-950/50 p-8 text-center backdrop-blur-sm md:p-12 lg:p-16">
+      <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Join Our Telegram Group</h2>
+      <p className="mx-auto mt-4 max-w-xl text-gray-400">
+        Must join our telegram group to stay updated about updates and announcements.
+      </p>
+      <ul className="mx-auto mt-8 flex max-w-xl flex-col gap-4 text-left">
+        <li className="flex items-center space-x-3">
+          <CheckCircle2 className="h-5 w-5 text-cyan-400" />
+          <span>Get Backup file</span>
+        </li>
+        <li className="flex items-center space-x-3">
+          <CheckCircle2 className="h-5 w-5 text-cyan-400" />
+          <span>Get support 24/7</span>
+        </li>
+        <li className="flex items-center space-x-3">
+          <CheckCircle2 className="h-5 w-5 text-cyan-400" />
+          <span>Experience new features</span>
+        </li>
+      </ul>
+      <a
+        href="https://t.me/instellacommunity"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Button className="mt-8 bg-gradient-to-r from-cyan-400 to-violet-500 text-lg text-black hover:from-cyan-500 hover:to-violet-600">
+          Join Now
+          <ArrowRight className="ml-2 h-5 w-5" />
+        </Button>
+      </a>
+    </div>
+  </div>
+</section>
 
       {/* Footer */}
       <footer className="border-t border-white/10 bg-black py-8">
