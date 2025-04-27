@@ -17,6 +17,7 @@ type BackupFile = {
   size: string
   changes: string[]
   isLatest?: boolean
+  downloadUrl: string // Add this new property
 }
 
 export default function BackupPage() {
@@ -29,31 +30,50 @@ export default function BackupPage() {
       size: "12.8 MB",
       changes: ["Added support for new Instagram features", "Improved backup compression", "Fixed restore issues"],
       isLatest: true,
+      downloadUrl: "https://example.com/backups/instella_backup_v2.5.0.igbackup",
     },
     {
       name: "instella_backup_v2.4.2.igbackup",
       date: "March 18, 2025",
       size: "12.5 MB",
       changes: ["Fixed backup corruption issues", "Added support for story highlights", "Improved metadata handling"],
+      downloadUrl: "https://example.com/backups/instella_backup_v2.4.2.igbackup",
     },
     {
       name: "instella_backup_v2.4.0.igbackup",
       date: "February 5, 2025",
       size: "12.3 MB",
       changes: ["Added support for saved collections", "Improved backup speed", "Fixed compatibility issues"],
+      downloadUrl: "https://example.com/backups/instella_backup_v2.4.0.igbackup",
     },
     {
       name: "instella_backup_v2.3.5.igbackup",
       date: "January 12, 2025",
       size: "12.1 MB",
       changes: ["Initial backup system release", "Basic support for posts and stories", "Profile data backup"],
+      downloadUrl: "https://example.com/backups/instella_backup_v2.3.5.igbackup",
     },
   ]
 
   const handleDownload = (fileName: string) => {
     setDownloading(fileName)
 
-    // Simulate download process
+    // Find the backup file that matches the requested file name
+    const backupFile = backupFiles.find((file) => file.name === fileName)
+
+    if (backupFile) {
+      // Create an anchor element to trigger the download
+      const link = document.createElement("a")
+      link.href = backupFile.downloadUrl
+      link.setAttribute("download", fileName)
+
+      // Append to the document, click it, and remove it
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+    }
+
+    // Show downloading state for a short period
     setTimeout(() => {
       setDownloading(null)
     }, 2000)
@@ -167,3 +187,4 @@ export default function BackupPage() {
     </div>
   )
 }
+
