@@ -158,42 +158,36 @@ export default function AboutPage() {
           </motion.section>
 
          <motion.section
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 1.4 }}
-      className="text-center"
-    >
-      <Card className="border border-white/10 bg-black">
-        <CardContent className="p-6 sm:p-8">
-          <Heart className="mx-auto mb-4 h-12 w-12 text-white" />
-          <h2 className="mb-4 text-2xl font-bold">Join Our Community</h2>
-          <p className="mb-6 text-gray-400">
-            Connect with other Instella users, get support, and stay updated on the latest developments.
-          </p>
-          <div className="flex flex-col items-center justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
-            <a
-              href="https://t.me/instellacommunity" // Replace with your actual Telegram group link
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full sm:w-auto"
-            >
-              <Button className="w-full bg-white text-black hover:bg-gray-200 sm:w-auto">
-                <Users className="mr-2 h-5 w-5" />
-                Join Telegram Group
-              </Button>
-            </a>
-            <Link href="/download">
-              <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white/10 sm:w-auto">
-                Download Latest Version
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </Link>
-          </div>
-        </CardContent>
-      </Card>
-    </motion.section>
-  );
-}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 1.4 }}
+            className="text-center"
+          >
+            <Card className="border border-white/10 bg-black">
+              <CardContent className="p-6 sm:p-8">
+                <Heart className="mx-auto mb-4 h-12 w-12 text-white" />
+                <h2 className="mb-4 text-2xl font-bold">Join Our Community</h2>
+                <p className="mb-6 text-gray-400">
+                  Connect with other Instella users, get support, and stay updated on the latest developments.
+                </p>
+                <div className="flex flex-col items-center justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
+                  <Button className="w-full bg-white text-black hover:bg-gray-200 sm:w-auto">
+                    <Users className="mr-2 h-5 w-5" />
+                    Join Telegram Group
+                  </Button>
+                  <Link href="/download">
+                    <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white/10 sm:w-auto">
+                      Download Latest Version
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </Button>
+                  </Link>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.section>
+        </motion.div>
+      </main>
+      
       <footer className="border-t border-white/10 bg-black py-8">
         <div className="container flex flex-col items-center justify-between space-y-4 px-4 md:flex-row md:space-y-0">
           <div className="flex items-center space-x-2">
