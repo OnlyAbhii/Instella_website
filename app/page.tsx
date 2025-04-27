@@ -148,7 +148,7 @@ export default function Home() {
               Instella
             </motion.h1>
             <motion.p
-              className="mx-auto max-w-2xl text-muted text-gray-400 sm:text-xl"
+              className="x-auto max-w-2xl text-gray-400 sm:text-xl"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
