@@ -16,6 +16,7 @@ type Version = {
   size: string
   features: string[]
   isLatest?: boolean
+  downloadUrl: string // Add this new property
 }
 
 export default function DownloadPage() {
@@ -34,31 +35,55 @@ export default function DownloadPage() {
         "Enhanced privacy controls",
       ],
       isLatest: true,
+      downloadUrl: "https://example.com/downloads/instella-v4.apk",
     },
     {
       version: "v3",
       date: "April 26, 2025",
       size: "91.2 MB",
       features: ["Base Update: v379.0.0.0.14", "Fixed login issues", "Improved performance", "Added new themes"],
+      downloadUrl: "https://example.com/downloads/instella-v3.apk",
     },
     {
       version: "v2",
       date: "April 26, 2025",
       size: "91.2 MB",
       features: ["Base Update: v379.0.0.0.10", "Updated core libraries", "Fixed crash on some devices"],
+      downloadUrl: "https://example.com/downloads/instella-v2.apk",
     },
     {
       version: "v1",
       date: "April 25, 2025",
       size: "90.6 MB",
-      features: ["Base Update: v378.0.0.0.64", "Improved backup system", "New UI elements", "Performance optimizations"],
+      features: [
+        "Base Update: v378.0.0.0.64",
+        "Improved backup system",
+        "New UI elements",
+        "Performance optimizations",
+      ],
+      downloadUrl: "https://example.com/downloads/instella-v1.apk",
     },
   ]
 
   const handleDownload = (version: string) => {
     setDownloading(version)
 
-    // Simulate download process
+    // Find the version object that matches the requested version
+    const versionData = versions.find((v) => v.version === version)
+
+    if (versionData) {
+      // Create an anchor element to trigger the download
+      const link = document.createElement("a")
+      link.href = versionData.downloadUrl
+      link.setAttribute("download", `instella-${version}.apk`)
+
+      // Append to the document, click it, and remove it
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+    }
+
+    // Show downloading state for a short period
     setTimeout(() => {
       setDownloading(null)
     }, 3000)
