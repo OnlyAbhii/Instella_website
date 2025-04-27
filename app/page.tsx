@@ -153,7 +153,7 @@ export default function Home() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              The Best Alpha Instagram for your Android device
+              The Best Alpha Instagram for your Android device to enhance your instagram experience
             </motion.p>
             <motion.div
               className="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-x-4 sm:space-y-0"
@@ -243,7 +243,7 @@ export default function Home() {
     {/* CTA Section */}
 <section className="relative z-10 border-t border-white/10 bg-black py-24">
   <div className="container px-4">
-    <div className="mx-auto max-w-3xl rounded-2xl border border-white/10 bg-gradient-to-r from-cyan-950/50 to-violet-950/50 p-8 text-center backdrop-blur-sm md:p-12 lg:p-16">
+    <div className="mx-auto max-w-3xl rounded-2xl border border-white/10 bg-gradient-to-r from-cyan-950/50 to-violet-950/50 p-8 text-center backdrop-blur-sm transition-colors hover:border-white/30 md:p-12 lg:p-16">
       <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Join Our Telegram Group</h2>
       <p className="mx-auto mt-4 max-w-xl text-gray-400">
         Join our Telegram group to stay updated on the latest news and announcements.
