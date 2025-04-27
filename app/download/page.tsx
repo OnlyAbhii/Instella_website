@@ -28,28 +28,28 @@ export default function DownloadPage() {
       date: "April 27, 2025",
       size: "91.2 MB",
       features: [
-        "Base Update: v379.0.0.0.29",
+        "Base Update: v379.0.0.0.21",
         "Upgraded to latest base version",
         "Improved download speeds",
         "New story viewer features",
         "Enhanced privacy controls",
       ],
       isLatest: true,
-      downloadUrl: "https://example.com/downloads/instella-v4.apk",
+      downloadUrl: "https://drive.google.com/file/d/1YjlQxyFypeQ1Asgm2WfTvooOlJPiRmgf/view?usp=drivesdk",
     },
     {
       version: "v3",
       date: "April 26, 2025",
       size: "91.2 MB",
       features: ["Base Update: v379.0.0.0.14", "Fixed login issues", "Improved performance", "Added new themes"],
-      downloadUrl: "https://example.com/downloads/instella-v3.apk",
+      downloadUrl: "https://instella.carrd.co/",
     },
     {
       version: "v2",
       date: "April 26, 2025",
       size: "91.2 MB",
       features: ["Base Update: v379.0.0.0.10", "Updated core libraries", "Fixed crash on some devices"],
-      downloadUrl: "https://example.com/downloads/instella-v2.apk",
+      downloadUrl: "https://instella.carrd.co/",
     },
     {
       version: "v1",
@@ -61,7 +61,7 @@ export default function DownloadPage() {
         "New UI elements",
         "Performance optimizations",
       ],
-      downloadUrl: "https://example.com/downloads/instella-v1.apk",
+      downloadUrl: "https://instella.carrd.co/",
     },
   ]
 
