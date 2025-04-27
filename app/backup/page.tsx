@@ -30,28 +30,28 @@ export default function BackupPage() {
       size: "3.9 kB",
       changes: ["Added support for new Instagram features", "Improved backup compression", "Fixed restore issues"],
       isLatest: true,
-      downloadUrl: "https://example.com/backups/instella_backup_v2.5.0.igbackup",
+      downloadUrl: "https://drive.google.com/file/d/1YtPg8Kww6NXiQLmwjm2TDVWF-iQ-423_/view?usp=drivesdk",
     },
     {
       name: "Ronnie_backup_v2.4.0.json",
       date: "April 26, 2025",
       size: "811.96 kB",
       changes: ["Fixed backup corruption issues", "Added support for story highlights", "Improved metadata handling"],
-      downloadUrl: "https://example.com/backups/instella_backup_v2.4.2.igbackup",
+      downloadUrl: "https://drive.google.com/file/d/1YyUQ6XpFuVj8zp1oi4IZn6HVi-0_w60t/view?usp=drivesdk",
     },
     {
       name: "Akshay_backup_v2.0.json",
       date: "April 5, 2025",
       size: "13.3 kB",
       changes: ["Added support for saved collections", "Improved backup speed", "Fixed compatibility issues"],
-      downloadUrl: "https://example.com/backups/instella_backup_v2.4.0.igbackup",
+      downloadUrl: "https://drive.google.com/file/d/1YyUQ6XpFuVj8zp1oi4IZn6HVi-0_w60t/view?usp=drivesdk",
     },
     {
       name: "Abhii_backup_v4.0.json",
       date: "April 12, 2025",
       size: "12.1 kB",
       changes: ["Initial backup system release", "Basic support for posts and stories", "Profile data backup"],
-      downloadUrl: "https://example.com/backups/instella_backup_v2.3.5.igbackup",
+      downloadUrl: "https://drive.google.com/file/d/1YyUQ6XpFuVj8zp1oi4IZn6HVi-0_w60t/view?usp=drivesdk",
     },
   ]
 
