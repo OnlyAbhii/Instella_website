@@ -240,13 +240,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA Section */}
+    {/* CTA Section */}
 <section className="relative z-10 border-t border-white/10 bg-black py-24">
   <div className="container px-4">
     <div className="mx-auto max-w-3xl rounded-2xl border border-white/10 bg-gradient-to-r from-cyan-950/50 to-violet-950/50 p-8 text-center backdrop-blur-sm md:p-12 lg:p-16">
       <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Join Our Telegram Group</h2>
       <p className="mx-auto mt-4 max-w-xl text-gray-400">
-        Must join our telegram group to stay updated about updates and announcements.
+        Join our Telegram group to stay updated on the latest news and announcements.
       </p>
       <ul className="mx-auto mt-8 flex max-w-xl flex-col gap-4 text-left">
         <li className="flex items-center space-x-3">
