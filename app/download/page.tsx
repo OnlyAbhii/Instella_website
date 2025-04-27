@@ -23,12 +23,12 @@ export default function DownloadPage() {
 
   const versions: Version[] = [
     {
-      version: "v2.6.0",
-      date: "May 15, 2025",
-      size: "46.5 MB",
+      version: "v4",
+      date: "April 27, 2025",
+      size: "91.2 MB",
       features: [
-        "Complete UI redesign",
-        "Added dark mode support",
+        "Base Update: v379.0.0.0.29",
+        "Upgraded to latest base version",
         "Improved download speeds",
         "New story viewer features",
         "Enhanced privacy controls",
@@ -36,22 +36,22 @@ export default function DownloadPage() {
       isLatest: true,
     },
     {
-      version: "v2.5.0",
+      version: "v3",
+      date: "April 26, 2025",
+      size: "91.2 MB",
+      features: ["Base Update: v379.0.0.0.14", "Fixed login issues", "Improved performance", "Added new themes"],
+    },
+    {
+      version: "v2",
+      date: "April 26, 2025",
+      size: "91.2 MB",
+      features: ["Base Update: v379.0.0.0.10", "Updated core libraries", "Fixed crash on some devices"],
+    },
+    {
+      version: "v1",
       date: "April 25, 2025",
-      size: "45.2 MB",
-      features: ["Enhanced story viewer", "Fixed login issues", "Improved performance", "Added new themes"],
-    },
-    {
-      version: "v2.4.2",
-      date: "March 18, 2025",
-      size: "44.8 MB",
-      features: ["Bug fixes", "Updated core libraries", "Fixed crash on some devices"],
-    },
-    {
-      version: "v2.4.0",
-      date: "February 5, 2025",
-      size: "44.5 MB",
-      features: ["Added post scheduling", "Improved backup system", "New UI elements", "Performance optimizations"],
+      size: "90.6 MB",
+      features: ["Base Update: v378.0.0.0.64", "Improved backup system", "New UI elements", "Performance optimizations"],
     },
   ]
 
