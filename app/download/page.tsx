@@ -24,35 +24,35 @@ export default function DownloadPage() {
 
   const versions: Version[] = [
     {
-      version: "Instella V5",
+      version: "Instella V6",
       date: "April 27, 2025",
-      size: "90.8 MB",
+      size: "90.4 MB",
       features: [
-        "Base Update: v379.0.0.0.29",
+        "Base Update: v379.0.0.0.44",
         "Upgraded to latest base version",
         "Improved download speeds",
         "New story viewer features",
         "Enhanced privacy controls",
       ],
       isLatest: true,
-      downloadUrl: "https://github.com/OnlyAbhii/instella_app/releases/download/V5.0.0.1/Instella.V5.64Bit.apk",
+      downloadUrl: "https://github.com/OnlyAbhii/instella_app/releases/download/V6.0/Instella.V6.64Bit.apk",
     },
     {
-      version: "v4",
-      date: "April 27, 2025",
+      version: "Instella V6 (32Bit)",
+      date: "April 28, 2025",
       size: "91.2 MB",
-      features: ["Base Update: v379.0.0.0.21", "Fixed login issues", "Improved performance", "Added new themes"],
-      downloadUrl: "https://drive.google.com/file/d/1YjlQxyFypeQ1Asgm2WfTvooOlJPiRmgf/view?usp=drivesdk",
+      features: ["Base Update: v379.0.0.0.29", "Fixed login issues", "Improved performance", "Added new themes"],
+      downloadUrl: "https://github.com/OnlyAbhii/instella_app/releases/download/V6.0/Instella.V6.32Bit.apk",
     },
     {
-      version: "v3",
+      version: "v5",
       date: "April 26, 2025",
       size: "91.2 MB",
       features: ["Base Update: v379.0.0.0.14", "Updated core libraries", "Fixed crash on some devices"],
       downloadUrl: "https://instella.carrd.co/",
     },
     {
-      version: "v2",
+      version: "v4",
       date: "April 25, 2025",
       size: "90.6 MB",
       features: [
