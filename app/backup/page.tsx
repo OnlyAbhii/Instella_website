@@ -1,8 +1,7 @@
 "use client"
 
 import Link from "next/link"
-
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import { ArrowDown, Calendar, FileText } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -17,66 +16,34 @@ type BackupFile = {
   size: string
   changes: string[]
   isLatest?: boolean
-  downloadUrl: string // Add this new property
+  downloadUrl: string
 }
 
 export default function BackupPage() {
+  const [backupFiles, setBackupFiles] = useState<BackupFile[]>([])
   const [downloading, setDownloading] = useState<string | null>(null)
 
-  const backupFiles: BackupFile[] = [
-    {
-      name: "Abhii_backup_v4.5.0.json",
-      date: "April 27, 2025",
-      size: "3.9 kB",
-      changes: ["Added support for new Instagram features", "Improved backup compression", "Fixed restore issues"],
-      isLatest: true,
-      downloadUrl: "https://drive.google.com/file/d/1YtPg8Kww6NXiQLmwjm2TDVWF-iQ-423_/view?usp=drivesdk",
-    },
-    {
-      name: "Ronnie_backup_v2.4.0.json",
-      date: "April 26, 2025",
-      size: "811.96 kB",
-      changes: ["Fixed backup corruption issues", "Added support for story highlights", "Improved metadata handling"],
-      downloadUrl: "https://drive.google.com/file/d/1YyUQ6XpFuVj8zp1oi4IZn6HVi-0_w60t/view?usp=drivesdk",
-    },
-    {
-      name: "Akshay_backup_v2.0.json",
-      date: "April 5, 2025",
-      size: "13.3 kB",
-      changes: ["Added support for saved collections", "Improved backup speed", "Fixed compatibility issues"],
-      downloadUrl: "https://drive.google.com/file/d/1YyUQ6XpFuVj8zp1oi4IZn6HVi-0_w60t/view?usp=drivesdk",
-    },
-    {
-      name: "Abhii_backup_v4.0.json",
-      date: "April 12, 2025",
-      size: "12.1 kB",
-      changes: ["Initial backup system release", "Basic support for posts and stories", "Profile data backup"],
-      downloadUrl: "https://drive.google.com/file/d/1YyUQ6XpFuVj8zp1oi4IZn6HVi-0_w60t/view?usp=drivesdk",
-    },
-  ]
+  useEffect(() => {
+    fetch("/backups.json")
+      .then((res) => res.json())
+      .then((data) => setBackupFiles(data))
+      .catch((err) => console.error("Failed to fetch backups.json", err))
+  }, [])
 
   const handleDownload = (fileName: string) => {
     setDownloading(fileName)
-
-    // Find the backup file that matches the requested file name
     const backupFile = backupFiles.find((file) => file.name === fileName)
 
     if (backupFile) {
-      // Create an anchor element to trigger the download
       const link = document.createElement("a")
       link.href = backupFile.downloadUrl
       link.setAttribute("download", fileName)
-
-      // Append to the document, click it, and remove it
       document.body.appendChild(link)
       link.click()
       document.body.removeChild(link)
     }
 
-    // Show downloading state for a short period
-    setTimeout(() => {
-      setDownloading(null)
-    }, 2000)
+    setTimeout(() => setDownloading(null), 2000)
   }
 
   return (
@@ -138,9 +105,7 @@ export default function BackupPage() {
                     >
                       {downloading === file.name ? (
                         <span className="flex items-center">
-                          <span
-                            className={`mr-2 h-4 w-4 animate-spin rounded-full border-2 ${file.isLatest ? "border-black border-t-transparent" : "border-white border-t-transparent"}`}
-                          ></span>
+                          <span className={`mr-2 h-4 w-4 animate-spin rounded-full border-2 ${file.isLatest ? "border-black border-t-transparent" : "border-white border-t-transparent"}`}></span>
                           Downloading...
                         </span>
                       ) : (
@@ -187,4 +152,3 @@ export default function BackupPage() {
     </div>
   )
 }
-
