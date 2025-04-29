@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { ArrowDown, Calendar, FileText } from "lucide-react"
+import { Calendar, FileText } from "lucide-react"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -12,6 +12,7 @@ import { FaInstagram } from "react-icons/fa"
 
 type BackupFile = {
   name: string
+  tagName: string
   date: string
   size: string
   changes: string[]
@@ -35,6 +36,7 @@ export default function BackupPage() {
           if (asset.name.endsWith(".json")) {
             allBackups.push({
               name: asset.name,
+              tagName: release.tag_name || "Untitled",
               date: new Date(asset.created_at).toLocaleDateString(),
               size: (asset.size / 1024).toFixed(2) + " kB",
               changes: release.body?.split("\n").filter(Boolean) || ["No changelog provided"],
@@ -77,7 +79,7 @@ export default function BackupPage() {
                     <div className="mb-4 sm:mb-0">
                       <div className="flex items-center">
                         <FileText className="mr-2 h-5 w-5 text-white" />
-                        <h3 className="text-lg font-medium">{file.name}</h3>
+                        <h3 className="text-lg font-medium">{file.tagName}</h3>
                         {file.isLatest && <Badge className="ml-2 bg-white text-black">Latest</Badge>}
                       </div>
                       <div className="mt-2 flex items-center text-sm text-gray-400">
