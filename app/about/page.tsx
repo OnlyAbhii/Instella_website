@@ -131,7 +131,7 @@ export default function AboutPage() {
                   Connect with other Instella users, get support, and stay updated on the latest developments.
                 </p>
                 <div className="flex flex-col items-center justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
-                  <Link href="https://t.me/yourgroup" target="_blank" rel="noopener noreferrer">
+                  <Link href="https://t.me/instellacommunity" target="_blank" rel="noopener noreferrer">
                     <Button className="w-full bg-white text-black hover:bg-gray-200 sm:w-auto">
                       <Users className="mr-2 h-5 w-5" />
                       Join Telegram Group
