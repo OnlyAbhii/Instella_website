@@ -9,12 +9,6 @@ import { FaInstagram } from "react-icons/fa"
 import Link from "next/link"
 
 export default function AboutPage() {
-  const teamMembers = [
-    { name: "Abhii", role: "Main Developer", image: "/placeholder.svg?height=100&width=100" },
-    { name: "Ronnie", role: "Manage Our Telegram Group ", image: "/placeholder.svg?height=100&width=100" },
-    { name: "Akshay", role: "Backend Developer", image: "/placeholder.svg?height=100&width=100" },
-  ]
-
   const features = [
     {
       icon: <Download className="h-10 w-10 text-white" />,
@@ -124,40 +118,6 @@ export default function AboutPage() {
           </motion.section>
 
           <motion.section
-            className="mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 1 }}
-          >
-            <h2 className="mb-8 text-center text-2xl font-bold sm:text-3xl">Our Team</h2>
-            <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
-              {teamMembers.map((member, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5, delay: 1.1 + index * 0.1 }}
-                  whileHover={{ y: -5 }}
-                >
-                  <Card className="overflow-hidden border border-white/10 bg-black text-center">
-                    <CardContent className="p-6">
-                      <div className="mx-auto mb-4 h-24 w-24 overflow-hidden rounded-full">
-                        <img
-                          src={member.image || "/placeholder.svg"}
-                          alt={member.name}
-                          className="h-full w-full object-cover"
-                        />
-                      </div>
-                      <h3 className="mb-1 text-lg font-bold">{member.name}</h3>
-                      <p className="text-sm text-gray-400">{member.role}</p>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </motion.section>
-
-         <motion.section
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 1.4 }}
@@ -171,10 +131,12 @@ export default function AboutPage() {
                   Connect with other Instella users, get support, and stay updated on the latest developments.
                 </p>
                 <div className="flex flex-col items-center justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
-                  <Button className="w-full bg-white text-black hover:bg-gray-200 sm:w-auto">
-                    <Users className="mr-2 h-5 w-5" />
-                    Join Telegram Group
-                  </Button>
+                  <Link href="https://t.me/yourgroup" target="_blank" rel="noopener noreferrer">
+                    <Button className="w-full bg-white text-black hover:bg-gray-200 sm:w-auto">
+                      <Users className="mr-2 h-5 w-5" />
+                      Join Telegram Group
+                    </Button>
+                  </Link>
                   <Link href="/download">
                     <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white/10 sm:w-auto">
                       Download Latest Version
@@ -187,7 +149,7 @@ export default function AboutPage() {
           </motion.section>
         </motion.div>
       </main>
-      
+
       <footer className="border-t border-white/10 bg-black py-8">
         <div className="container flex flex-col items-center justify-between space-y-4 px-4 md:flex-row md:space-y-0">
           <div className="flex items-center space-x-2">
