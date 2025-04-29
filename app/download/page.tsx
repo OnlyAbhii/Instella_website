@@ -513,7 +513,7 @@ export default function DownloadPage() {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5, delay: 1.4 }}
               >
-                Previous Versions
+                Other Version 
               </motion.h2>
 
               {displayVersions.slice(1).map((version, index) => (
