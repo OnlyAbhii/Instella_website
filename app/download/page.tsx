@@ -1,7 +1,7 @@
 "use client"
 
-import { useState } from "react"
-import { motion } from "framer-motion"
+import { useState, useEffect } from "react"
+import { motion, AnimatePresence } from "framer-motion"
 import { ArrowDown, Download, Info, Calendar } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -19,55 +19,56 @@ type Version = {
   downloadUrl: string // Add this new property
 }
 
+const versions: Version[] = [
+  {
+    version: "64 Bit",
+    date: "April 27, 2025",
+    size: "90.4 MB",
+    features: [
+      "Base Update: v379.0.0.0.44",
+      "Upgraded to latest base version",
+      "Improved download speeds",
+      "Enhanced privacy controls",
+    ],
+    isLatest: true,
+    downloadUrl: "https://github.com/OnlyAbhii/instella_app/releases/download/V6.0/Instella.V6.64Bit.apk",
+  },
+  {
+    version: "64 Bit Clone",
+    date: "April 28, 2025",
+    size: "91.2 MB",
+    features: ["Base Update: v379.0.0.0.44", "Clone functionality", "Run multiple accounts", "Enhanced performance"],
+    downloadUrl: "https://github.com/OnlyAbhii/instella_app/releases/download/V6.0/Instella.V6.64Bit.Clone.apk",
+  },
+  {
+    version: "32 Bit Clone",
+    date: "April 26, 2025",
+    size: "89.5 MB",
+    features: [
+      "Base Update: v379.0.0.0.29",
+      "Clone functionality for older devices",
+      "Optimized for 32-bit processors",
+      "Run multiple accounts",
+    ],
+    downloadUrl: "https://github.com/OnlyAbhii/instella_app/releases/download/V6.0/Instella.V6.32Bit.Clone.apk",
+  },
+  {
+    version: "32 Bit",
+    date: "April 25, 2025",
+    size: "88.7 MB",
+    features: [
+      "Base Update: v379.0.0.0.29",
+      "Optimized for 32-bit processors",
+      "Compatible with older devices",
+      "Reduced memory usage",
+    ],
+    downloadUrl: "https://github.com/OnlyAbhii/instella_app/releases/download/V6.0/Instella.V6.32Bit.apk",
+  },
+]
+
 export default function DownloadPage() {
   const [downloading, setDownloading] = useState<string | null>(null)
-
-  const versions: Version[] = [
-    {
-      version: "64 Bit",
-      date: "April 27, 2025",
-      size: "90.4 MB",
-      features: [
-        "Base Update: v379.0.0.0.44",
-        "Upgraded to latest base version",
-        "Improved download speeds",
-        "Enhanced privacy controls",
-      ],
-      isLatest: true,
-      downloadUrl: "https://github.com/OnlyAbhii/instella_app/releases/download/V6.0/Instella.V6.64Bit.apk",
-    },
-    {
-      version: "64 Bit Clone",
-      date: "April 28, 2025",
-      size: "91.2 MB",
-      features: ["Base Update: v379.0.0.0.44", "Clone functionality", "Run multiple accounts", "Enhanced performance"],
-      downloadUrl: "https://github.com/OnlyAbhii/instella_app/releases/download/V6.0/Instella.V6.64Bit.Clone.apk",
-    },
-    {
-      version: "32 Bit Clone",
-      date: "April 26, 2025",
-      size: "89.5 MB",
-      features: [
-        "Base Update: v379.0.0.0.29",
-        "Clone functionality for older devices",
-        "Optimized for 32-bit processors",
-        "Run multiple accounts",
-      ],
-      downloadUrl: "https://github.com/OnlyAbhii/instella_app/releases/download/V6.0/Instella.V6.32Bit.Clone.apk",
-    },
-    {
-      version: "32 Bit",
-      date: "April 25, 2025",
-      size: "88.7 MB",
-      features: [
-        "Base Update: v379.0.0.0.29",
-        "Optimized for 32-bit processors",
-        "Compatible with older devices",
-        "Reduced memory usage",
-      ],
-      downloadUrl: "https://github.com/OnlyAbhii/instella_app/releases/download/V6.0/Instella.V6.32Bit.apk",
-    },
-  ]
+  const [backgroundPosition, setBackgroundPosition] = useState({ x: 0, y: 0 })
 
   const handleDownload = (version: string) => {
     setDownloading(version)
@@ -93,11 +94,27 @@ export default function DownloadPage() {
     }, 3000)
   }
 
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const x = e.clientX / window.innerWidth
+      const y = e.clientY / window.innerHeight
+      setBackgroundPosition({ x, y })
+    }
+
+    window.addEventListener("mousemove", handleMouseMove)
+    return () => window.removeEventListener("mousemove", handleMouseMove)
+  }, [])
+
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div
+      className="min-h-screen bg-black text-white relative overflow-hidden"
+      style={{
+        backgroundImage: `radial-gradient(circle at ${backgroundPosition.x * 100}% ${backgroundPosition.y * 100}%, rgba(50, 50, 50, 0.2) 0%, rgba(0, 0, 0, 0) 50%)`,
+      }}
+    >
       <Navigation />
 
-      <main className="container mx-auto px-4 pt-24 pb-16">
+      <main className="container mx-auto px-4 pt-24 pb-16 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -113,7 +130,7 @@ export default function DownloadPage() {
             Download Instella
           </motion.h1>
 
-          <Card className="mb-8 overflow-hidden border border-white/10 bg-black">
+          <Card className="mb-8 overflow-hidden border border-white/10 bg-black/80 backdrop-blur-sm">
             <CardContent className="p-0">
               <div className="border-b border-white/10 p-6">
                 <div className="mb-6 flex items-center justify-between">
@@ -130,11 +147,29 @@ export default function DownloadPage() {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.5, delay: 0.3 }}
                   >
-                    <Badge className="bg-white text-black hover:bg-gray-200">Latest</Badge>
+                    <Badge className="bg-white text-black hover:bg-gray-200 relative overflow-hidden">
+                      <motion.span
+                        className="absolute inset-0 bg-white/30"
+                        animate={{
+                          scale: [1, 1.2, 1],
+                          opacity: [0, 0.5, 0],
+                        }}
+                        transition={{
+                          duration: 2,
+                          repeat: Number.POSITIVE_INFINITY,
+                          repeatType: "loop",
+                        }}
+                      />
+                      Latest
+                    </Badge>
                   </motion.div>
                 </div>
 
-                <div className="rounded-lg border border-white/10 bg-white/5 p-6">
+                <motion.div
+                  className="rounded-lg border border-white/10 bg-white/5 p-6"
+                  whileHover={{ boxShadow: "0 0 20px rgba(255, 255, 255, 0.1)" }}
+                  transition={{ duration: 0.3 }}
+                >
                   <div className="mb-4 flex items-center justify-between">
                     <div>
                       <motion.h3
@@ -181,6 +216,7 @@ export default function DownloadPage() {
                           initial={{ opacity: 0, x: -10 }}
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ duration: 0.3, delay: 0.7 + index * 0.1 }}
+                          whileHover={{ x: 5, color: "rgba(255, 255, 255, 0.8)" }}
                         >
                           {feature}
                         </motion.li>
@@ -193,25 +229,42 @@ export default function DownloadPage() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 1.2 }}
                   >
-                    <Button
-                      onClick={() => handleDownload(versions[0].version)}
-                      disabled={downloading === versions[0].version}
-                      className="w-full bg-white text-black hover:bg-gray-200"
-                    >
-                      {downloading === versions[0].version ? (
-                        <span className="flex items-center">
-                          <span className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-black border-t-transparent"></span>
-                          Downloading...
-                        </span>
-                      ) : (
-                        <span className="flex items-center">
-                          <Download className="mr-2 h-5 w-5" />
-                          Download Latest Version
-                        </span>
-                      )}
-                    </Button>
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={downloading === versions[0].version ? "downloading" : "download"}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <Button
+                          onClick={() => handleDownload(versions[0].version)}
+                          disabled={downloading === versions[0].version}
+                          className="w-full bg-white text-black hover:bg-gray-200 relative overflow-hidden"
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                        >
+                          {downloading === versions[0].version ? (
+                            <motion.span
+                              className="flex items-center"
+                              initial={{ width: "0%" }}
+                              animate={{ width: "100%" }}
+                              transition={{ duration: 3 }}
+                            >
+                              <span className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-black border-t-transparent"></span>
+                              Downloading...
+                            </motion.span>
+                          ) : (
+                            <motion.span className="flex items-center" whileHover={{ y: -2 }}>
+                              <Download className="mr-2 h-5 w-5" />
+                              Download Latest Version
+                            </motion.span>
+                          )}
+                        </Button>
+                      </motion.div>
+                    </AnimatePresence>
                   </motion.div>
-                </div>
+                </motion.div>
               </div>
 
               <div className="p-6">
@@ -220,7 +273,7 @@ export default function DownloadPage() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.5, delay: 1.3 }}
-                  whileHover={{ scale: 1.02 }}
+                  whileHover={{ scale: 1.02, backgroundColor: "rgba(255, 255, 255, 0.1)" }}
                 >
                   <Info className="mr-2 h-5 w-5" />
                   <span className="text-sm">Make sure to backup your data before installing a new version.</span>
@@ -243,10 +296,16 @@ export default function DownloadPage() {
               key={index}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 1.5 + index * 0.1 }}
+              transition={{
+                duration: 0.5,
+                delay: 1.5 + index * 0.2,
+                type: "spring",
+                stiffness: 100,
+                damping: 15,
+              }}
               whileHover={{ y: -5 }}
             >
-              <Card className="mb-4 border border-white/10 bg-black">
+              <Card className="mb-4 border border-white/10 bg-black/80 backdrop-blur-sm">
                 <CardContent className="p-6">
                   <div className="mb-4 flex items-center justify-between">
                     <div>
@@ -263,29 +322,52 @@ export default function DownloadPage() {
                     <h4 className="mb-2 text-sm font-medium">What's new:</h4>
                     <ul className="list-inside list-disc space-y-1 text-sm text-gray-400">
                       {version.features.map((feature, i) => (
-                        <li key={i}>{feature}</li>
+                        <motion.li
+                          key={i}
+                          whileHover={{ x: 5, color: "rgba(255, 255, 255, 0.8)" }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          {feature}
+                        </motion.li>
                       ))}
                     </ul>
                   </div>
 
-                  <Button
-                    variant="outline"
-                    onClick={() => handleDownload(version.version)}
-                    disabled={downloading === version.version}
-                    className="w-full border-white/20 text-white hover:bg-white/10"
-                  >
-                    {downloading === version.version ? (
-                      <span className="flex items-center">
-                        <span className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></span>
-                        Downloading...
-                      </span>
-                    ) : (
-                      <span className="flex items-center">
-                        <ArrowDown className="mr-2 h-5 w-5" />
-                        Download {version.version}
-                      </span>
-                    )}
-                  </Button>
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={downloading === version.version ? "downloading" : "download"}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <Button
+                        variant="outline"
+                        onClick={() => handleDownload(version.version)}
+                        disabled={downloading === version.version}
+                        className="w-full border-white/20 text-white hover:bg-white/10 relative overflow-hidden"
+                        whileHover={{ scale: 1.02, borderColor: "rgba(255, 255, 255, 0.4)" }}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        {downloading === version.version ? (
+                          <motion.span
+                            className="flex items-center"
+                            initial={{ width: "0%" }}
+                            animate={{ width: "100%" }}
+                            transition={{ duration: 3 }}
+                          >
+                            <span className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></span>
+                            Downloading...
+                          </motion.span>
+                        ) : (
+                          <motion.span className="flex items-center" whileHover={{ y: -2 }}>
+                            <ArrowDown className="mr-2 h-5 w-5" />
+                            Download {version.version}
+                          </motion.span>
+                        )}
+                      </Button>
+                    </motion.div>
+                  </AnimatePresence>
                 </CardContent>
               </Card>
             </motion.div>
@@ -293,14 +375,35 @@ export default function DownloadPage() {
         </motion.div>
       </main>
 
-      <footer className="border-t border-white/10 bg-black py-8">
+      <motion.div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: "radial-gradient(circle at center, rgba(50, 50, 50, 0.1) 0%, rgba(0, 0, 0, 0) 70%)",
+          zIndex: 0,
+        }}
+        animate={{
+          scale: [1, 1.1, 1],
+          opacity: [0.3, 0.5, 0.3],
+        }}
+        transition={{
+          duration: 15,
+          repeat: Number.POSITIVE_INFINITY,
+          repeatType: "reverse",
+        }}
+      />
+
+      <footer className="border-t border-white/10 bg-black/80 backdrop-blur-sm py-8 relative z-10">
         <div className="container flex flex-col items-center justify-between space-y-4 px-4 md:flex-row md:space-y-0">
-          <div className="flex items-center space-x-2">
+          <motion.div
+            className="flex items-center space-x-2"
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          >
             <Link href="/">
               <FaInstagram className="h-6 w-6 text-white transition-transform hover:scale-110" />
             </Link>
             <span className="font-bold">Instella</span>
-          </div>
+          </motion.div>
           <p className="text-sm text-gray-400">© {new Date().getFullYear()} Instella All rights reserved.</p>
         </div>
       </footer>
