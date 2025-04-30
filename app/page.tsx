@@ -155,7 +155,7 @@ export default function Home() {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{
-            duration: 1,
+            duration: 1.5,
             delay: 1.5,
             repeat: Number.POSITIVE_INFINITY,
             repeatType: "loop",
