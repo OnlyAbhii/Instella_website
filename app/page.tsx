@@ -1,7 +1,7 @@
 "use client"
 
 import { motion, AnimatePresence } from "framer-motion"
-import { ArrowRight, CheckCircle2, Download, Shield, Zap, Code, Star, Heart, MessageCircle } from "lucide-react"
+import { ArrowRight, CheckCircle2, Download, Shield, Zap, Code } from 'lucide-react'
 import { FaInstagram, FaTelegram } from "react-icons/fa"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -52,18 +52,6 @@ export default function Home() {
       title: "Open Source",
       description: "Transparent development with community contributions welcome.",
       delay: 0.3,
-    },
-    {
-      icon: <Star className="h-12 w-12 text-white" />,
-      title: "Enhanced Features",
-      description: "Access premium features that enhance your social media experience.",
-      delay: 0.4,
-    },
-    {
-      icon: <Heart className="h-12 w-12 text-white" />,
-      title: "Community Driven",
-      description: "Built with feedback from users like you to create the perfect experience.",
-      delay: 0.5,
     },
   ]
 
@@ -120,10 +108,6 @@ export default function Home() {
                 <stop offset="50%" stopColor="#ffffff" stopOpacity="0.3" />
                 <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
               </linearGradient>
-              <linearGradient id="grad3" x1="0" y1="1" x2="1" y2="0">
-                <stop offset="0%" stopColor="#9333ea" stopOpacity="0.5" />
-                <stop offset="100%" stopColor="#06b6d4" stopOpacity="0.5" />
-              </linearGradient>
             </defs>
             {/* Top Curves */}
             <motion.path
@@ -174,18 +158,6 @@ export default function Home() {
               stroke="url(#grad1)"
               strokeWidth="1"
             />
-
-            {/* Circular path for the Instagram icon */}
-            <motion.path
-              d="M400,300 a100,100 0 1,0 200,0 a100,100 0 1,0 -200,0"
-              fill="none"
-              stroke="url(#grad3)"
-              strokeWidth="2"
-              strokeDasharray="5,5"
-              initial={{ pathLength: 0, opacity: 0 }}
-              animate={{ pathLength: 1, opacity: 0.6 }}
-              transition={{ duration: 4, ease: "easeInOut", repeat: Number.POSITIVE_INFINITY, repeatType: "loop" }}
-            />
           </svg>
 
           {/* Straight Lines */}
@@ -215,7 +187,7 @@ export default function Home() {
                   top: `${10 + i * 15}%`,
                   height: "1px",
                   width: "100%",
-                  background: `linear-gradient(90deg, transparent, ${i % 2 === 0 ? "#ffffff" : "#06b6d4"}60, transparent)`,
+                  background: `linear-gradient(90deg, transparent, ${i % 2 === 0 ? "#ffffff" : "#ffffff"}60, transparent)`,
                 }}
               />
             ))}
@@ -228,7 +200,7 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.4 }}
             transition={{ duration: 2 }}
-            className="absolute -left-1/4 top-1/4 h-96 w-96 rounded-full bg-gradient-to-r from-violet-500/20 to-cyan-500/20 blur-3xl"
+            className="absolute -left-1/4 top-1/4 h-96 w-96 rounded-full bg-white/10 blur-3xl"
             style={{
               transform: `translateY(${scrollY * 0.1}px)`,
             }}
@@ -237,7 +209,7 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.4 }}
             transition={{ duration: 2, delay: 0.5 }}
-            className="absolute -right-1/4 top-1/2 h-96 w-96 rounded-full bg-gradient-to-r from-cyan-500/20 to-violet-500/20 blur-3xl"
+            className="absolute -right-1/4 top-1/2 h-96 w-96 rounded-full bg-white/10 blur-3xl"
             style={{
               transform: `translateY(${scrollY * -0.05}px)`,
             }}
@@ -252,36 +224,13 @@ export default function Home() {
             transition={{ duration: 1 }}
             className="mx-auto max-w-3xl space-y-8"
           >
-            <motion.div
-              className="relative mx-auto mb-8 flex h-32 w-32 items-center justify-center"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8 }}
-            >
-              <motion.div
-                className="absolute inset-0 rounded-full bg-gradient-to-r from-violet-500 to-cyan-500 opacity-70"
-                animate={{
-                  scale: [1, 1.05, 1],
-                  opacity: [0.7, 0.9, 0.7],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Number.POSITIVE_INFINITY,
-                  repeatType: "loop",
-                }}
-              />
-              <FaInstagram className="relative z-10 h-16 w-16 text-white" />
-            </motion.div>
-
             <motion.h1
               className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8 }}
             >
-              <span className="bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent">
-                Instella
-              </span>
+              Instella
             </motion.h1>
             <motion.p
               className="mx-auto max-w-2xl text-gray-400 sm:text-xl"
@@ -289,8 +238,7 @@ export default function Home() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              The Ultimate Instagram Enhancement for Android. Experience Instagram like never before with advanced
-              features and a seamless interface.
+              The Best Alpha Instagram for your Android device to enhance your instagram experience
             </motion.p>
             <motion.div
               className="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-x-4 sm:space-y-0"
@@ -299,34 +247,31 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 0.4 }}
             >
               <Link href="/download">
-                <Button className="group relative w-full overflow-hidden bg-gradient-to-r from-violet-500 to-cyan-500 text-black hover:from-violet-600 hover:to-cyan-600 sm:w-auto">
-                  <motion.span
-                    className="absolute inset-0 bg-white/20"
-                    initial={{ x: "-100%" }}
-                    whileHover={{ x: "100%" }}
-                    transition={{ duration: 0.5 }}
-                  />
-                  <span className="relative flex items-center">
+                <Button
+                  className="group w-full bg-white text-black hover:bg-gray-200 sm:w-auto"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span className="flex items-center">
                     Download Now
-                    <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                    <motion.span
+                      className="ml-2"
+                      animate={{ x: [0, 3, 0] }}
+                      transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY, repeatType: "loop" }}
+                    >
+                      <ArrowRight className="h-5 w-5" />
+                    </motion.span>
                   </span>
                 </Button>
               </Link>
               <Link href="/backup">
                 <Button
                   variant="outline"
-                  className="group w-full border-white/20 text-white hover:border-white/40 hover:bg-white/5 sm:w-auto"
+                  className="w-full border-white/10 text-white hover:bg-white/10 sm:w-auto"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  <span className="flex items-center">
-                    Backup Library
-                    <motion.span
-                      className="ml-2"
-                      animate={{ x: [0, 3, 0] }}
-                      transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY, repeatType: "loop" }}
-                    >
-                      <MessageCircle className="h-5 w-5" />
-                    </motion.span>
-                  </span>
+                  Backup Library
                 </Button>
               </Link>
             </motion.div>
@@ -370,14 +315,10 @@ export default function Home() {
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-              <span className="bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent">
-                Instella Features
-              </span>
-            </h2>
-            <p className="mt-4 text-gray-400">Discover what makes Instella the best Instagram mod available</p>
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Instella Features</h2>
+            <p className="mt-4 text-gray-400">Main Features of Instella</p>
           </motion.div>
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             {features.map((feature, index) => (
               <motion.div
                 key={index}
@@ -386,17 +327,16 @@ export default function Home() {
                 transition={{ duration: 0.5, delay: feature.delay }}
                 viewport={{ once: true }}
                 whileHover={{ y: -10, transition: { duration: 0.2 } }}
-                className="group rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-white/0 p-6 backdrop-blur-sm transition-all duration-300 hover:border-white/30 hover:shadow-lg hover:shadow-violet-500/10"
+                className="group rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-colors hover:border-white/30"
               >
                 <motion.div
                   initial={{ scale: 1 }}
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                  className="mb-4 rounded-full bg-gradient-to-r from-violet-500/20 to-cyan-500/20 p-3 text-white"
                 >
                   {feature.icon}
                 </motion.div>
-                <h3 className="mb-2 text-xl font-bold">{feature.title}</h3>
+                <h3 className="mb-2 mt-4 text-xl font-bold">{feature.title}</h3>
                 <p className="text-gray-400">{feature.description}</p>
               </motion.div>
             ))}
@@ -407,26 +347,10 @@ export default function Home() {
       {/* CTA Section */}
       <section className="relative z-10 border-t border-white/10 bg-black py-24">
         <div className="container px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="mx-auto max-w-3xl overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-r from-violet-950/50 to-cyan-950/50 p-8 text-center backdrop-blur-sm transition-all duration-300 hover:border-white/30 hover:shadow-lg hover:shadow-violet-500/10 md:p-12 lg:p-16"
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="mb-6 flex justify-center"
-            >
-              <FaTelegram className="h-16 w-16 text-cyan-400" />
-            </motion.div>
+          <div className="mx-auto max-w-3xl rounded-2xl border border-white/10 bg-black/50 p-8 text-center backdrop-blur-sm transition-colors hover:border-white/30 md:p-12 lg:p-16">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Join Our Telegram Group</h2>
             <p className="mx-auto mt-4 max-w-xl text-gray-400">
-              Join our Telegram group to stay updated on the latest news, get support, and connect with other Instella
-              users.
+              Join our Telegram group to stay updated on the latest news and announcements.
             </p>
             <ul className="mx-auto mt-8 flex max-w-xl flex-col gap-4 text-left">
               <motion.li
@@ -436,8 +360,8 @@ export default function Home() {
                 transition={{ duration: 0.3, delay: 0.3 }}
                 viewport={{ once: true }}
               >
-                <CheckCircle2 className="h-5 w-5 text-cyan-400" />
-                <span>Get Backup files and latest updates</span>
+                <CheckCircle2 className="h-5 w-5 text-white" />
+                <span>Get Backup file</span>
               </motion.li>
               <motion.li
                 className="flex items-center space-x-3"
@@ -446,8 +370,8 @@ export default function Home() {
                 transition={{ duration: 0.3, delay: 0.4 }}
                 viewport={{ once: true }}
               >
-                <CheckCircle2 className="h-5 w-5 text-cyan-400" />
-                <span>Get support 24/7 from our community</span>
+                <CheckCircle2 className="h-5 w-5 text-white" />
+                <span>Get support 24/7</span>
               </motion.li>
               <motion.li
                 className="flex items-center space-x-3"
@@ -456,8 +380,8 @@ export default function Home() {
                 transition={{ duration: 0.3, delay: 0.5 }}
                 viewport={{ once: true }}
               >
-                <CheckCircle2 className="h-5 w-5 text-cyan-400" />
-                <span>Experience new features before official release</span>
+                <CheckCircle2 className="h-5 w-5 text-white" />
+                <span>Experience new features</span>
               </motion.li>
             </ul>
             <motion.div
@@ -467,19 +391,13 @@ export default function Home() {
               viewport={{ once: true }}
             >
               <a href="https://t.me/instellacommunity" target="_blank" rel="noopener noreferrer">
-                <Button className="group relative mt-8 overflow-hidden bg-gradient-to-r from-cyan-400 to-violet-500 text-lg text-black hover:from-cyan-500 hover:to-violet-600">
-                  <motion.span
-                    className="absolute inset-0 bg-white/20"
-                    initial={{ x: "-100%" }}
-                    whileHover={{ x: "100%" }}
-                    transition={{ duration: 0.5 }}
-                  />
-                  <span className="relative flex items-center">
+                <Button className="mt-8 bg-white text-black hover:bg-gray-200">
+                  <span className="flex items-center">
                     Join Now
                     <motion.span
                       className="ml-2"
-                      animate={{ x: [0, 5, 0] }}
-                      transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY, repeatType: "loop" }}
+                      animate={{ x: [0, 3, 0] }}
+                      transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY, repeatType: "loop" }}
                     >
                       <ArrowRight className="h-5 w-5" />
                     </motion.span>
@@ -487,7 +405,7 @@ export default function Home() {
                 </Button>
               </a>
             </motion.div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -496,11 +414,7 @@ export default function Home() {
         <div className="container flex flex-col items-center justify-between space-y-4 px-4 md:flex-row md:space-y-0">
           <div className="flex items-center space-x-2">
             <Link href="/">
-              <motion.div
-                whileHover={{ rotate: 360, scale: 1.2 }}
-                transition={{ duration: 0.7, type: "spring", stiffness: 200 }}
-                className="rounded-full bg-gradient-to-r from-violet-500/20 to-cyan-500/20 p-2"
-              >
+              <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.5 }}>
                 <FaInstagram className="h-6 w-6 text-white" />
               </motion.div>
             </Link>
@@ -508,23 +422,14 @@ export default function Home() {
           </div>
           <p className="text-sm text-gray-400">© {new Date().getFullYear()} Instella All rights reserved.</p>
           <div className="flex space-x-6">
-            <Link className="group text-sm text-gray-400 transition-colors hover:text-white" href="/backup">
-              <span className="relative">
-                Backup
-                <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-violet-400 to-cyan-400 transition-all duration-300 group-hover:w-full"></span>
-              </span>
+            <Link className="text-sm text-gray-400 hover:text-white" href="/backup">
+              Backup
             </Link>
-            <Link className="group text-sm text-gray-400 transition-colors hover:text-white" href="/download">
-              <span className="relative">
-                Download
-                <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-violet-400 to-cyan-400 transition-all duration-300 group-hover:w-full"></span>
-              </span>
+            <Link className="text-sm text-gray-400 hover:text-white" href="/download">
+              Download
             </Link>
-            <Link className="group text-sm text-gray-400 transition-colors hover:text-white" href="/about">
-              <span className="relative">
-                About
-                <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-violet-400 to-cyan-400 transition-all duration-300 group-hover:w-full"></span>
-              </span>
+            <Link className="text-sm text-gray-400 hover:text-white" href="/about">
+              About
             </Link>
           </div>
         </div>
