@@ -1,32 +1,15 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { Calendar, FileText, Download, CheckCircle, AlertCircle, Info, ExternalLink } from "lucide-react"
 import { motion } from "framer-motion"
+import { ArrowRight, Heart, Code, Shield, Zap, Download } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import Navigation from "@/components/navigation"
-import Link from "next/link"
 import { FaInstagram } from "react-icons/fa"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import Link from "next/link"
+import { useEffect, useState } from "react"
 
-type BackupFile = {
-  name: string
-  tagName: string
-  date: string
-  size: string
-  changes: string[]
-  isLatest?: boolean
-  downloadUrl: string
-}
-
-export default function BackupPage() {
-  const [backups, setBackups] = useState<BackupFile[]>([])
-  const [downloading, setDownloading] = useState<string | null>(null)
-  const [downloadSuccess, setDownloadSuccess] = useState<string | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+export default function AboutPage() {
   const [scrollY, setScrollY] = useState(0)
 
   useEffect(() => {
@@ -40,71 +23,32 @@ export default function BackupPage() {
     }
   }, [])
 
-  useEffect(() => {
-    async function fetchReleases() {
-      try {
-        setLoading(true)
-        const res = await fetch("https://api.github.com/repos/OnlyAbhii/instella_app/releases")
-
-        if (!res.ok) {
-          throw new Error("Failed to fetch releases")
-        }
-
-        const releases = await res.json()
-        const allBackups: BackupFile[] = []
-
-        for (const release of releases) {
-          for (const asset of release.assets) {
-            if (asset.name.endsWith(".json")) {
-              allBackups.push({
-                name: asset.name,
-                tagName: release.tag_name || "Untitled",
-                date: new Date(asset.created_at).toLocaleDateString(),
-                size: (asset.size / 1024).toFixed(2) + " kB",
-                changes: release.body?.split("\n").filter(Boolean) || ["No changelog provided"],
-                isLatest: releases[0].id === release.id,
-                downloadUrl: asset.browser_download_url,
-              })
-            }
-          }
-        }
-
-        setBackups(allBackups)
-        setLoading(false)
-      } catch (err) {
-        setError("Failed to load backup files. Please try again later.")
-        setLoading(false)
-        console.error(err)
-      }
-    }
-
-    fetchReleases()
-  }, [])
-
-  const handleDownload = (file: BackupFile) => {
-    setDownloading(file.name)
-
-    try {
-      const a = document.createElement("a")
-      a.href = file.downloadUrl
-      a.setAttribute("download", file.name)
-      document.body.appendChild(a)
-      a.click()
-      document.body.removeChild(a)
-
-      setTimeout(() => {
-        setDownloading(null)
-        setDownloadSuccess(file.name)
-
-        setTimeout(() => {
-          setDownloadSuccess(null)
-        }, 3000)
-      }, 1000)
-    } catch (err) {
-      setDownloading(null)
-      console.error(err)
-    }
-  }
+  const features = [
+    {
+      icon: <Download className="h-10 w-10 text-white" />,
+      title: "Clone Support",
+      description: "Use Instella alongside your original Instagram app without conflicts.",
+      delay: 0.1,
+    },
+    {
+      icon: <Shield className="h-10 w-10 text-white" />,
+      title: "Ad Free Experience",
+      description: "Enjoy Instagram without any annoying advertisements.",
+      delay: 0.2,
+    },
+    {
+      icon: <Zap className="h-10 w-10 text-white" />,
+      title: "Faster Updates",
+      description: "Get the latest features and improvements before anyone else.",
+      delay: 0.3,
+    },
+    {
+      icon: <Code className="h-10 w-10 text-white" />,
+      title: "Open Source",
+      description: "Transparent development with community contributions welcome.",
+      delay: 0.4,
+    },
+  ]
 
   const container = {
     hidden: { opacity: 0 },
@@ -125,213 +69,156 @@ export default function BackupPage() {
     <div className="min-h-screen bg-black text-white">
       <Navigation />
 
-      {/* Animated background elements */}
-      <div className="fixed inset-0 -z-10 overflow-hidden">
-        <motion.div
-          className="absolute top-1/4 -left-1/4 h-96 w-96 rounded-full bg-violet-500/10 blur-3xl"
-          style={{
-            transform: `translateY(${scrollY * 0.1}px)`,
-          }}
-        />
-        <motion.div
-          className="absolute top-3/4 -right-1/4 h-96 w-96 rounded-full bg-cyan-500/10 blur-3xl"
-          style={{
-            transform: `translateY(${scrollY * -0.05}px)`,
-          }}
-        />
-      </div>
-
       <main className="container mx-auto px-4 pt-24 pb-16">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mx-auto max-w-3xl">
-          <motion.div className="mb-8 text-center">
+        {/* Animated background elements */}
+        <div className="fixed inset-0 -z-10 overflow-hidden">
+          <motion.div
+            className="absolute top-1/4 -left-1/4 h-96 w-96 rounded-full bg-white/10 blur-3xl"
+            style={{
+              transform: `translateY(${scrollY * 0.1}px)`,
+            }}
+          />
+          <motion.div
+            className="absolute top-3/4 -right-1/4 h-96 w-96 rounded-full bg-white/10 blur-3xl"
+            style={{
+              transform: `translateY(${scrollY * -0.05}px)`,
+            }}
+          />
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className="mx-auto max-w-4xl"
+        >
+          <motion.div
+            className="mb-16 text-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
             <motion.h1
-              className="text-3xl font-bold"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <span className="bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent">
-                Library Backup Files
-              </span>
-            </motion.h1>
-            <motion.p
-              className="mt-4 text-gray-400"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              className="mb-4 text-4xl font-bold sm:text-5xl"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              Download backup files to restore your Instella settings and preferences
+              About Instella
+            </motion.h1>
+            <motion.p
+              className="mx-auto max-w-2xl text-gray-400"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+            >
+              Instella is a powerful Instagram mod designed to enhance your social media experience with additional
+              features and improvements.
             </motion.p>
           </motion.div>
 
-          {loading ? (
-            <motion.div
-              className="flex flex-col items-center justify-center py-12"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-            >
-              <div className="mb-4 h-12 w-12">
+          <motion.section
+            className="mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
+            <h2 className="mb-8 text-center text-2xl font-bold sm:text-3xl">Instella Mission</h2>
+            <Card className="border border-white/10 bg-black/50 backdrop-blur-sm">
+              <CardContent className="p-6 sm:p-8">
+                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}>
+                  <p className="mb-4 text-center text-lg">
+                    We believe in creating a better social media experience that puts users first.
+                  </p>
+                  <p className="text-center text-gray-400">
+                    Instella was created to provide Instagram users with more control over their experience, removing
+                    limitations and adding features that enhance how you connect with others. Our team is dedicated to
+                    continuous improvement and responding to community feedback to create the most powerful and
+                    user-friendly Instagram mod available.
+                  </p>
+                </motion.div>
+              </CardContent>
+            </Card>
+          </motion.section>
+
+          <motion.section
+            className="mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            variants={container}
+          >
+            <h2 className="mb-8 text-center text-2xl font-bold sm:text-3xl">Key Features</h2>
+            <div className="grid gap-6 md:grid-cols-2">
+              {features.map((feature, index) => (
                 <motion.div
-                  className="h-full w-full rounded-full border-4 border-t-violet-500 border-r-transparent border-b-cyan-500 border-l-transparent"
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-                />
-              </div>
-              <p className="text-gray-400">Loading backup files...</p>
-            </motion.div>
-          ) : error ? (
-            <motion.div
-              className="rounded-lg border border-red-500/30 bg-red-500/10 p-6 text-center"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-            >
-              <AlertCircle className="mx-auto mb-4 h-12 w-12 text-red-400" />
-              <h3 className="mb-2 text-xl font-medium text-red-400">Error Loading Backups</h3>
-              <p className="text-gray-400">{error}</p>
-              <Button
-                className="mt-4 bg-gradient-to-r from-violet-500 to-cyan-500 text-black hover:from-violet-600 hover:to-cyan-600"
-                onClick={() => window.location.reload()}
-              >
-                Try Again
-              </Button>
-            </motion.div>
-          ) : backups.length === 0 ? (
-            <motion.div
-              className="rounded-lg border border-yellow-500/30 bg-yellow-500/10 p-6 text-center"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-            >
-              <Info className="mx-auto mb-4 h-12 w-12 text-yellow-400" />
-              <h3 className="mb-2 text-xl font-medium text-yellow-400">No Backup Files Found</h3>
-              <p className="text-gray-400">There are currently no backup files available for download.</p>
-            </motion.div>
-          ) : (
-            <motion.div variants={container} initial="hidden" animate="show">
-              {backups.map((file, index) => (
-                <motion.div key={file.name} variants={item} transition={{ delay: 0.1 * index }}>
-                  <Card className="mb-4 overflow-hidden border border-white/10 bg-gradient-to-br from-white/5 to-transparent backdrop-blur-sm transition-all duration-300 hover:border-white/30 hover:shadow-lg hover:shadow-violet-500/10">
-                    <CardContent className="p-0">
-                      <div className="flex flex-col border-b border-white/10 p-6 sm:flex-row sm:items-center sm:justify-between">
-                        <div className="mb-4 sm:mb-0">
-                          <div className="flex items-center">
-                            <motion.div
-                              whileHover={{ rotate: 15 }}
-                              transition={{ duration: 0.2 }}
-                              className="mr-2 rounded-full bg-gradient-to-r from-violet-500/20 to-cyan-500/20 p-1"
-                            >
-                              <FileText className="h-5 w-5 text-white" />
-                            </motion.div>
-                            <h3 className="text-lg font-medium">{file.tagName}</h3>
-                            {file.isLatest && (
-                              <Badge className="ml-2 bg-gradient-to-r from-violet-500 to-cyan-500 text-black">
-                                Latest
-                              </Badge>
-                            )}
-                          </div>
-                          <div className="mt-2 flex items-center text-sm text-gray-400">
-                            <Calendar className="mr-1 h-4 w-4" />
-                            <span>{file.date}</span>
-                            <span className="mx-2">•</span>
-                            <span>{file.size}</span>
-                          </div>
-                        </div>
-                        <TooltipProvider>
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <Button
-                                onClick={() => handleDownload(file)}
-                                disabled={downloading === file.name}
-                                className={`group relative overflow-hidden ${
-                                  file.isLatest
-                                    ? "bg-gradient-to-r from-violet-500 to-cyan-500 text-black hover:from-violet-600 hover:to-cyan-600"
-                                    : "border-white/20 bg-transparent text-white hover:bg-white/10"
-                                }`}
-                              >
-                                {downloading === file.name ? (
-                                  <span className="flex items-center">
-                                    <motion.div
-                                      className="mr-2 h-4 w-4 rounded-full border-2 border-t-transparent"
-                                      animate={{ rotate: 360 }}
-                                      transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-                                    />
-                                    Downloading...
-                                  </span>
-                                ) : downloadSuccess === file.name ? (
-                                  <span className="flex items-center">
-                                    <CheckCircle className="mr-2 h-4 w-4" />
-                                    Downloaded!
-                                  </span>
-                                ) : (
-                                  <span className="flex items-center">
-                                    <Download className="mr-2 h-4 w-4 transition-transform group-hover:-translate-y-1" />
-                                    Download
-                                  </span>
-                                )}
-                                {file.isLatest && (
-                                  <motion.span
-                                    className="absolute inset-0 bg-white/20"
-                                    initial={{ x: "-100%" }}
-                                    whileHover={{ x: "100%" }}
-                                    transition={{ duration: 0.5 }}
-                                  />
-                                )}
-                              </Button>
-                            </TooltipTrigger>
-                            <TooltipContent>
-                              <p>Download {file.name}</p>
-                            </TooltipContent>
-                          </Tooltip>
-                        </TooltipProvider>
-                      </div>
-                      <div className="bg-white/5 p-4">
-                        <h4 className="mb-2 text-sm font-medium">Changelog:</h4>
-                        <ul className="list-inside list-disc space-y-1 text-sm text-gray-400">
-                          {file.changes.map((c, i) => (
-                            <motion.li
-                              key={i}
-                              initial={{ opacity: 0, x: -10 }}
-                              whileInView={{ opacity: 1, x: 0 }}
-                              transition={{ delay: 0.1 * i, duration: 0.3 }}
-                              viewport={{ once: true }}
-                            >
-                              {c}
-                            </motion.li>
-                          ))}
-                        </ul>
-                      </div>
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: feature.delay }}
+                  viewport={{ once: true }}
+                  whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                  variants={item}
+                >
+                  <Card className="h-full border border-white/10 bg-black/50 backdrop-blur-sm">
+                    <CardContent className="flex h-full flex-col p-6">
+                      <motion.div
+                        initial={{ scale: 1 }}
+                        whileHover={{ scale: 1.1, rotate: 5 }}
+                        transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                        className="mb-4"
+                      >
+                        {feature.icon}
+                      </motion.div>
+                      <h3 className="mb-2 text-xl font-bold">{feature.title}</h3>
+                      <p className="text-gray-400">{feature.description}</p>
                     </CardContent>
                   </Card>
                 </motion.div>
               ))}
-            </motion.div>
-          )}
+            </div>
+          </motion.section>
 
-          <motion.div
-            className="mt-12 rounded-lg border border-white/10 bg-gradient-to-br from-white/5 to-transparent p-6 text-center backdrop-blur-sm"
+          <motion.section
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            viewport={{ once: true }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 1.4 }}
+            className="text-center"
           >
-            <h3 className="mb-4 text-xl font-bold">Need Help With Backups?</h3>
-            <p className="mb-6 text-gray-400">
-              Join our Telegram community for assistance with installing and using backup files.
-            </p>
-            <a href="https://t.me/instellacommunity" target="_blank" rel="noopener noreferrer" className="inline-block">
-              <Button className="group relative overflow-hidden bg-gradient-to-r from-violet-500 to-cyan-500 text-black hover:from-violet-600 hover:to-cyan-600">
-                <motion.span
-                  className="absolute inset-0 bg-white/20"
-                  initial={{ x: "-100%" }}
-                  whileHover={{ x: "100%" }}
-                  transition={{ duration: 0.5 }}
-                />
-                <span className="relative flex items-center">
-                  Join Telegram Support
-                  <ExternalLink className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </span>
-              </Button>
-            </a>
-          </motion.div>
+            <Card className="border border-white/10 bg-black/50 backdrop-blur-sm">
+              <CardContent className="p-6 sm:p-8">
+                <Heart className="mx-auto mb-4 h-12 w-12 text-white" />
+                <h2 className="mb-4 text-2xl font-bold">Join Our Community</h2>
+                <p className="mb-6 text-gray-400">
+                  Connect with other Instella users, get support, and stay updated on the latest developments.
+                </p>
+                <div className="flex flex-col items-center justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
+                  <Link href="https://t.me/instellacommunity" target="_blank" rel="noopener noreferrer">
+                    <Button className="w-full bg-white text-black hover:bg-gray-200 sm:w-auto">
+                      Join Telegram Group
+                    </Button>
+                  </Link>
+                  <Link href="/download">
+                    <Button
+                      variant="outline"
+                      className="w-full border-white/20 text-white hover:bg-white/10 sm:w-auto"
+                    >
+                      <span className="flex items-center">
+                        Download Latest Version
+                        <motion.span
+                          className="ml-2"
+                          animate={{ x: [0, 3, 0] }}
+                          transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY, repeatType: "loop" }}
+                        >
+                          <ArrowRight className="h-5 w-5" />
+                        </motion.span>
+                      </span>
+                    </Button>
+                  </Link>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.section>
         </motion.div>
       </main>
 
@@ -339,11 +226,7 @@ export default function BackupPage() {
         <div className="container flex flex-col items-center justify-between space-y-4 px-4 md:flex-row md:space-y-0">
           <div className="flex items-center space-x-2">
             <Link href="/">
-              <motion.div
-                whileHover={{ rotate: 360, scale: 1.2 }}
-                transition={{ duration: 0.7, type: "spring", stiffness: 200 }}
-                className="rounded-full bg-gradient-to-r from-violet-500/20 to-cyan-500/20 p-2"
-              >
+              <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.5 }}>
                 <FaInstagram className="h-6 w-6 text-white" />
               </motion.div>
             </Link>
@@ -351,23 +234,14 @@ export default function BackupPage() {
           </div>
           <p className="text-sm text-gray-400">© {new Date().getFullYear()} Instella All rights reserved.</p>
           <div className="flex space-x-6">
-            <Link className="group text-sm text-gray-400 transition-colors hover:text-white" href="/download">
-              <span className="relative">
-                Download
-                <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-violet-400 to-cyan-400 transition-all duration-300 group-hover:w-full"></span>
-              </span>
+            <Link className="text-sm text-gray-400 hover:text-white" href="/backup">
+              Backup
             </Link>
-            <Link className="group text-sm text-gray-400 transition-colors hover:text-white" href="/about">
-              <span className="relative">
-                About
-                <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-violet-400 to-cyan-400 transition-all duration-300 group-hover:w-full"></span>
-              </span>
+            <Link className="text-sm text-gray-400 hover:text-white" href="/download">
+              Download
             </Link>
-            <Link className="group text-sm text-gray-400 transition-colors hover:text-white" href="/">
-              <span className="relative">
-                Home
-                <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-violet-400 to-cyan-400 transition-all duration-300 group-hover:w-full"></span>
-              </span>
+            <Link className="text-sm text-gray-400 hover:text-white" href="/">
+              Home
             </Link>
           </div>
         </div>
