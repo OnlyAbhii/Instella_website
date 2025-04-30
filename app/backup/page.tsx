@@ -162,7 +162,7 @@ export default function BackupPage() {
                   <ArrowLeft className="mr-2 h-4 w-4" />
                   Back
                 </Button>
-                <h1 className="text-2xl font-bold">{selectedBackup.tgname}</h1>
+                <h1 className="text-2xl font-bold">{selectedBackup.tagname}</h1>
               </motion.div>
               
               <Card className="mb-6 border border-white/10 bg-black/50 backdrop-blur-sm">
@@ -202,7 +202,7 @@ export default function BackupPage() {
                     disabled={downloading === selectedBackup.name}
                     className="w-full bg-white text-black hover:bg-gray-200"
                   >
-                    {downloading === selectedBackup.tgname ? (
+                    {downloading === selectedBackup.tagname ? (
                       <span className="flex items-center">
                         <motion.div
                           className="mr-2 h-4 w-4 rounded-full border-2 border-t-transparent border-black"
